@@ -14,7 +14,7 @@ function game()
         {
            
             playerSelection = prompt("Enter rock, paper, or scissors").toLowerCase();
-            alert("you chose" + playerSelection);
+        
             if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors")//change to be not case sensitive
             {
                 console.log("Invalid input. You must enter rock, paper, or scissors");
@@ -22,7 +22,7 @@ function game()
         }
 
         computerSelection = getComputerChoice();
-        console.log(computerSelection);
+       
 
         result = playRound(playerSelection, computerSelection);
         console.log(result);
@@ -38,11 +38,11 @@ function game()
 
     if(playerWins > computerWins)
     {
-        console.log("You Win");
+        console.log("You win the game");
     }
     else
     {
-        console.log("You Lose");
+        console.log("You lose the game");
     }
 }
 
@@ -122,7 +122,7 @@ function playRound(playerSelection, computerSelection)
 
 function getComputerChoice()
 {
-    let num = Math.random() * 3;
+    let num = Math.floor(Math.random() * 3);
 
     if(num == 0)
     {
