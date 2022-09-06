@@ -1,3 +1,19 @@
+
+
+
+
+
+function startGame()
+{
+    let buttons = querySelectorAll("button");
+
+    buttons.forEach(button => {
+        button.addEventListener('click', playRound(button.id))
+    });
+}
+
+
+
 function game()
 {
     let playerSelection;
@@ -46,9 +62,15 @@ function game()
     }
 }
 
-function playRound(playerSelection, computerSelection)
+
+
+
+
+function playRound(playerSelection)
 {
     let win, lose;
+    let computerSelection = getComputerChoice();
+
 
     if(playerSelection == "rock")
     {
@@ -120,6 +142,9 @@ function playRound(playerSelection, computerSelection)
 }
 
 
+
+
+
 function getComputerChoice()
 {
     let num = Math.floor(Math.random() * 3);
@@ -137,3 +162,10 @@ function getComputerChoice()
         return "scissors";
     }
 }
+
+
+
+
+
+
+startGame();
