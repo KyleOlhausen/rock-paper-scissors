@@ -13,11 +13,6 @@ function startGame()
             playRound(button.id, winLossTieCount)
         })
     });
-
-
-  
-  
-
 }
 
 
@@ -69,61 +64,65 @@ function playRound(playerSelection, winLossTieCount)
     let computerSelection = getComputerChoice();
 
 
+ 
+
+
+
+
+    checkGameWin();
+}
+
+function compareChoices()
+{
     if(playerSelection == "rock")
     {
         if(computerSelection == "rock")
         {
-            win = false;
-            lose = false;
+           return "tie";
         }
         else if(computerSelection == "paper")
         {
-            win = false;
-            lose = true;
+           return "lose";
         }
         else
         {
-            win = true;
-            lose = false;
+           return "win";
         }
     }
     else if(playerSelection == "paper")
     {
         if(computerSelection == "rock")
         {
-            win = true;
-            lose = false;
+            return "win";
         }
         else if(computerSelection == "paper")
         {
-            win = false;
-            lose = false;
+            return "tie";
         }
         else
         {
-            win = false;
-            lose = true;
+            return "lose";
         }
     }
     else
     {
         if(computerSelection == "rock")
         {
-            win = false;
-            lose = true;
+            return "lose";
         }
         else if(computerSelection == "paper")
         {
-            win = true;
-            lose = false;
+            return "win";
         }
         else
         {
-            win = false;
-            lose = false;
+            return "tie";
         }
     }
+}
 
+function checkRoundWin()
+{
     if(win)
     {
         winLossTieCount[0]++;
@@ -139,13 +138,9 @@ function playRound(playerSelection, winLossTieCount)
         winLossTieCount[2]++;
         console.log( "Tie");
     }
-
-
-    checkWin();
 }
 
-
-function checkWin()
+function checkGameWin()
 {
     if(winLossTieCount[0]>2)
     {
