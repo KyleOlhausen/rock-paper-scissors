@@ -17,62 +17,36 @@ function startGame()
 
 
 
-function game()
-{
-    let playerSelection;
-    let computerSelection;
-    let result;
-    let playerWins = 0;
-    let computerWins = 0;
-
-    while(playerWins < 3 && computerWins < 3)
-    {
-    
-
-        computerSelection = getComputerChoice();
-       
-
-        result = playRound(playerSelection, computerSelection);
-        console.log(result);
-        if(result.includes("win"))
-        {
-            playerWins++;
-        }
-        else if(result.includes("lose"))
-        {
-            computerWins++;
-        }
-    }
-
-    if(playerWins > computerWins)
-    {
-        console.log("You win the game");
-    }
-    else
-    {
-        console.log("You lose the game");
-    }
-}
-
-
-
-
 
 function playRound(playerSelection, winLossTieCount)
 {
-    let win, lose;
     let computerSelection = getComputerChoice();
+    let roundResult = checkRoundWin(playerSelection, computerSelection);
+    let header = document.querySelector(".header");
 
+    if(roundResult == "win")
+    {
+        winLossTieCount[0]++;
+        document.querySelector(".pWins").textContent = "Player wins: " + winLossTieCount[0];
+        header.textContent = "You win! " + playerSelection + " beats " + computerSelection;
+    }
+    else if(roundResult == "lose")
+    {
+        winLossTieCount[1]++;
+        document.querySelector(".cWins").textContent = "Computer wins: " + winLossTieCount[1];
+        header.textContent = "You lose! " + computerSelection + " beats " + playerSelection;
+    }
+    else
+    {
+        winLossTieCount[2]++;
+        document.querySelector(".ties").textContent = "Ties: " + winLossTieCount[2];
+        header.textContent = "Tie";
+    }
 
- 
-
-
-
-
-    checkGameWin();
+    checkGameWin(winLossTieCount);
 }
 
-function compareChoices()
+function checkRoundWin(playerSelection, computerSelection)
 {
     if(playerSelection == "rock")
     {
@@ -121,45 +95,34 @@ function compareChoices()
     }
 }
 
-function checkRoundWin()
+
+
+function checkGameWin(winLossTieCount)
 {
-    if(win)
+    let header = document.querySelector(".header");
+
+    if(winLossTieCount[0]>4)
     {
-        winLossTieCount[0]++;
-        console.log("You win! " + playerSelection + " beats " + computerSelection);
+        header.textContent = "You win the game!";
+        resetGame(winLossTieCount);
     }
-    else if(lose)
+
+    if(winLossTieCount[1]>4)
     {
-        winLossTieCount[1]++;
-        console.log("You lose! " + computerSelection + " beats " + playerSelection);
-    }
-    else
-    {
-        winLossTieCount[2]++;
-        console.log( "Tie");
+        header.textContent = "You lose the game, try again!";
+        resetGame(winLossTieCount);
     }
 }
 
-function checkGameWin()
+function resetGame(winLossTieCount)
 {
-    if(winLossTieCount[0]>2)
-    {
-        console.log("you win")
-        winLossTieCount[0] = 0;
-        winLossTieCount[1] = 0;
-        winLossTieCount[2] = 0;
-    }
-
-    if(winLossTieCount[1]>2)
-    {
-        console.log("you lose")
-        winLossTieCount[0] = 0;
-        winLossTieCount[1] = 0;
-        winLossTieCount[2] = 0;
-    }
+    winLossTieCount[0] = 0;
+    winLossTieCount[1] = 0;
+    winLossTieCount[2] = 0;
+    document.querySelector(".pWins").textContent = "Player wins: 0";
+    document.querySelector(".cWins").textContent = "Computer wins: 0";
+    document.querySelector(".ties").textContent = "Ties: 0";
 }
-
-
 
 function getComputerChoice()
 {
