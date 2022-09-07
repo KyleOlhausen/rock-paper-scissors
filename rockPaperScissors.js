@@ -5,11 +5,16 @@
 
 function startGame()
 {
-    let buttons = querySelectorAll("button");
+    let pWins = 0, cWins = 0;
+    let buttons = document.querySelectorAll("button");
 
     buttons.forEach(button => {
-        button.addEventListener('click', playRound(button.id))
+        button.addEventListener('click', () => {
+            playRound(button.id, pWins, cWins)
+        })
     });
+
+
 }
 
 
@@ -24,18 +29,7 @@ function game()
 
     while(playerWins < 3 && computerWins < 3)
     {
-        playerSelection = "";
-        computerSelection = "";
-        while(playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors")
-        {
-           
-            playerSelection = prompt("Enter rock, paper, or scissors").toLowerCase();
-        
-            if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors")//change to be not case sensitive
-            {
-                console.log("Invalid input. You must enter rock, paper, or scissors");
-            }
-        }
+    
 
         computerSelection = getComputerChoice();
        
@@ -66,7 +60,7 @@ function game()
 
 
 
-function playRound(playerSelection)
+function playRound(playerSelection, pWins, cWins)
 {
     let win, lose;
     let computerSelection = getComputerChoice();
@@ -129,15 +123,15 @@ function playRound(playerSelection)
 
     if(win)
     {
-        return "You win! " + playerSelection + " beats " + computerSelection;
+        console.log("You win! " + playerSelection + " beats " + computerSelection);
     }
     else if(lose)
     {
-        return "You lose! " + computerSelection + " beats " + playerSelection;
+        console.log("You lose! " + computerSelection + " beats " + playerSelection);
     }
     else
     {
-        return "Tie";
+        console.log( "Tie");
     }
 }
 
