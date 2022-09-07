@@ -1,29 +1,23 @@
-
-
-
-
-
 function startGame()
 {
     let winLossTieCount = [0,0,0];
     let buttons = document.querySelectorAll("button");
 
     buttons.forEach(button => {
-        button.addEventListener('click', () => {    //UNDERSTAND CALLBACK FUNCTIONS
+        button.addEventListener('click', () => {    
             playRound(button.id, winLossTieCount)
         })
     });
 }
 
-
-
-
+//play a round and check if game is won or lost
 function playRound(playerSelection, winLossTieCount)
 {
     let computerSelection = getComputerChoice();
     let roundResult = checkRoundWin(playerSelection, computerSelection);
     let header = document.querySelector(".header");
 
+    //inc counter, display counter, display round result
     if(roundResult == "win")
     {
         winLossTieCount[0]++;
@@ -46,6 +40,7 @@ function playRound(playerSelection, winLossTieCount)
     checkGameWin(winLossTieCount);
 }
 
+//compare players choice with computers choice and return string of result
 function checkRoundWin(playerSelection, computerSelection)
 {
     if(playerSelection == "rock")
@@ -95,8 +90,7 @@ function checkRoundWin(playerSelection, computerSelection)
     }
 }
 
-
-
+//check if there are 5 wins or losses and display result, then reset game
 function checkGameWin(winLossTieCount)
 {
     let header = document.querySelector(".header");
@@ -114,6 +108,7 @@ function checkGameWin(winLossTieCount)
     }
 }
 
+//set counters and display numbers to 0
 function resetGame(winLossTieCount)
 {
     winLossTieCount[0] = 0;
@@ -124,6 +119,7 @@ function resetGame(winLossTieCount)
     document.querySelector(".ties").textContent = "Ties: 0";
 }
 
+//randomly choose rock, paper, scissors for computer
 function getComputerChoice()
 {
     let num = Math.floor(Math.random() * 3);
@@ -141,10 +137,5 @@ function getComputerChoice()
         return "scissors";
     }
 }
-
-
-
-
-
 
 startGame();
