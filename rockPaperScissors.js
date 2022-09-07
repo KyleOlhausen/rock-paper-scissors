@@ -5,15 +5,18 @@
 
 function startGame()
 {
-    let pWins = 0, cWins = 0;
+    let winLossTieCount = [0,0,0];
     let buttons = document.querySelectorAll("button");
 
     buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            playRound(button.id, pWins, cWins)
+        button.addEventListener('click', () => {    //UNDERSTAND CALLBACK FUNCTIONS
+            playRound(button.id, winLossTieCount)
         })
     });
 
+
+  
+  
 
 }
 
@@ -60,7 +63,7 @@ function game()
 
 
 
-function playRound(playerSelection, pWins, cWins)
+function playRound(playerSelection, winLossTieCount)
 {
     let win, lose;
     let computerSelection = getComputerChoice();
@@ -123,19 +126,43 @@ function playRound(playerSelection, pWins, cWins)
 
     if(win)
     {
+        winLossTieCount[0]++;
         console.log("You win! " + playerSelection + " beats " + computerSelection);
     }
     else if(lose)
     {
+        winLossTieCount[1]++;
         console.log("You lose! " + computerSelection + " beats " + playerSelection);
     }
     else
     {
+        winLossTieCount[2]++;
         console.log( "Tie");
     }
+
+
+    checkWin();
 }
 
 
+function checkWin()
+{
+    if(winLossTieCount[0]>2)
+    {
+        console.log("you win")
+        winLossTieCount[0] = 0;
+        winLossTieCount[1] = 0;
+        winLossTieCount[2] = 0;
+    }
+
+    if(winLossTieCount[1]>2)
+    {
+        console.log("you lose")
+        winLossTieCount[0] = 0;
+        winLossTieCount[1] = 0;
+        winLossTieCount[2] = 0;
+    }
+}
 
 
 
